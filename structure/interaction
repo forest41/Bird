@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鳥類外形互動圖</title>
+    <style>
+        .tooltip {
+            display: none;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .image-container {
+            position: relative;
+        }
+        .highlight-area {
+            position: absolute;
+            background-color: rgba(255, 255, 0, 0.5);
+            border: 1px solid yellow;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="bird.png" alt="鳥類外形圖" usemap="#birdmap">
+        <map name="birdmap">
+            <area shape="rect" coords="50,50,150,150" href="#" alt="上喙" 
+                  onclick="showTooltip(event, '上喙：鳥的上嘴部分，主要用於覓食。')">
+            <area shape="rect" coords="150,150,250,250" href="#" alt="下喙" 
+                  onclick="showTooltip(event, '下喙：鳥的下嘴部分，與上喙共同構成嘴部功能。')">
+        </map>
+        <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <script>
+        function showTooltip(event, text) {
+            event.preventDefault();
+            const tooltip = document.getElementById('tooltip');
+            tooltip.textContent = text;
+            tooltip.style.left = `${event.pageX}px`;
+            tooltip.style.top = `${event.pageY}px`;
+            tooltip.style.display = 'block';
+        }
+
+        document.body.addEventListener('click', () => {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
